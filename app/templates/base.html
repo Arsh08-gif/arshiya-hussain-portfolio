@@ -33,12 +33,11 @@
                 <a href="/">Experience</a>
                 <a href="/">Education</a>
                 <a href="/">Travel</a>
-                <a href="/" class="{{ 'active' if request.path == '/hobbies' }}">Hobbies</a>
+                <a href="/" class="{{ 'active' if request.path == '/' }}">Hobbies</a>
             </nav>
         </div>
     </header>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
     {%block content%} {%endblock%}
 
 </body>
