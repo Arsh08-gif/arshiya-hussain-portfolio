@@ -22,7 +22,6 @@ def index():
         {
             "role": "Software Engineer Intern",
             "company": "E-Connect Solutions",
-
             "duration": "Feb 2024 — July 2024",
             "type": "Internship",
             "points": [
@@ -32,7 +31,6 @@ def index():
         {
             "role": "Salesforce Trainee",
             "company": "V2 Solutions",
-            
             "duration": "Jan 2025 — June 2025",
             "type": "Internship",
             "points": [
@@ -72,53 +70,34 @@ def index():
 
     places = [
         {
-            "name": "India",
-            "emoji": "🇮🇳",
-            "lat": 20.5937,
-            "lng": 78.9629,
-            "note": "Home 🏠",
-        },
-        {
             "name": "Boston, USA",
-            "emoji": "🇺🇸",
             "lat": 42.3601,
             "lng": -71.0589,
-            "note": "Northeastern University",
         },
         {
             "name": "Jaipur, India",
-            "emoji": "🏰",
             "lat": 26.9124,
             "lng": 75.7873,
-            "note": "Manipal University Jaipur",
         },
         {
             "name": "Vietnam",
-            "emoji": "🇻🇳",
             "lat": 14.0583,
             "lng": 108.2772,
-            "note": "Visited 🌿",
         },
         {
             "name": "New York, USA",
-            "emoji": "🗽",
             "lat": 40.7128,
             "lng": -74.0060,
-            "note": "The Big Apple",
         },
         {
             "name": "Dubai, UAE",
-            "emoji": "🇦🇪",
             "lat": 25.2048,
             "lng": 55.2708,
-            "note": "City of Gold ✨",
         },
         {
             "name": "Abu Dhabi, UAE",
-            "emoji": "🕌",
             "lat": 24.4539,
             "lng": 54.3773,
-            "note": "Capital of UAE",
         },
         {
             "name": "Spiti Valley, India",
@@ -129,24 +108,18 @@ def index():
         },
         {
             "name": "Delhi, India",
-            "emoji": "🏛️",
             "lat": 28.6139,
             "lng": 77.2090,
-            "note": "Capital of India",
         },
         {
             "name": "Meghalaya, India",
-            "emoji": "☁️",
             "lat": 25.4670,
             "lng": 91.3662,
-            "note": "Abode of Clouds",
         },
         {
             "name": "Shillong, India",
-            "emoji": "🎵",
             "lat": 25.5788,
             "lng": 91.8933,
-            "note": "Scotland of the East",
         },
     ]
 
@@ -159,28 +132,25 @@ def index():
         education=education,
         places=places,
     )
-    
-    
-@app.route('/hobbies')
+
+
+@app.route("/hobbies")
 def hobbies_page():
     hobbies = [
         {
             "name": "Running",
-            "icon": "🏃",
-            "description": "Long distance running keeps me grounded. Pushing through the last mile translates directly to how I approach hard problems.",
-            "image": "https://images.pexels.com/photos/2524368/pexels-photo-2524368.jpeg?w=400"
+            "description": "Long distance running keeps me grounded.",
+            "image": "https://images.pexels.com/photos/2524368/pexels-photo-2524368.jpeg?w=400",
         },
         {
             "name": "Reading",
-            "icon": "📚",
             "description": "I love getting lost in a good book — fiction, non-fiction, anything that makes me think differently about the world.",
-            "image": "https://images.pexels.com/photos/256450/pexels-photo-256450.jpeg?w=400"
+            "image": "https://images.pexels.com/photos/256450/pexels-photo-256450.jpeg?w=400",
         },
         {
-            "name": "Doing Art",
-            "icon": "🎨",
+            "name": "Art",
             "description": "Art makes a quiet appearance in my life every once in a while — a small painting here and there, just for the joy of it.",
-            "image": "https://images.pexels.com/photos/1269968/pexels-photo-1269968.jpeg?w=400"
+            "image": "https://images.pexels.com/photos/1269968/pexels-photo-1269968.jpeg?w=400",
         },
     ]
-    return render_template('hobbies.html', hobbies=hobbies)
+    return render_template("hobbies.html", hobbies=hobbies)
