@@ -1,40 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block title %}MLH Fellow Portfolio{% endblock %}
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta property="og:title" content="Personal Portfolio">
-    <meta property="og:description" content="My Personal Portfolio">
-    <meta property="og:url" content="{{ url }}">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
-
-    <link lang='sass' rel="stylesheet" href="./static/styles/main.css">
-    <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
-    <title>{{ title }}</title>
-</head>
-
-<body>
-    <header class="nav-bar">
-        <div class="nav-content">
-            <a href="/">
-                <div class="nav-logo">
-                    <img src="./static/img/logo.svg" />
-                </div>
-            </a>
-        </div>
-    </header>
-
-    <div class="profile">
-        <div id="profile-picture" class="profile-picture">
-            <img src="./static/img/logo.jpg">
-        </div>
-        <h1>{{ title }}</h1>
+{%block content%}
+<!-- Profile -->
+<div class="profile">
+    <div class="profile-picture">
+        <img src="/static/img/profile-pic.jpeg">
     </div>
-</body>
-</html>
+    <h1>Arshiya Hussain</h1>
+    <p class="subtitle">MS Computer Science @ Northeastern · MLH Fellow</p>
+</div>
+
+<!-- About -->
+<section class="section" id="about">
+    <h2>About Me</h2>
+    <div class="about-card">
+        <p>{{ about }}</p>
+    </div>
+</section>
+
+<!-- Experience -->
+<section class="section" id="experience">
+    <h2>Work Experience</h2>
+    <div class="work-timeline">
+        {% for job in work_experiences %}
+        <div class="work-card">
+            <div class="work-body">
+                <div class="work-header">
+                    <div>
+                        <h3>{{ job.role }}</h3>
+                        <p class="work-company">
+                            <span class="work-company-name">{{ job.company }}</span>
+                            <span class="work-dot">·</span>
+                            <span class="work-location">{{ job.location }}</span>
+                        </p>
+                    </div>
+                    <div class="work-meta">
+                        <span class="work-type {{ 'type-full' if job.type == 'Full-Time' else 'type-intern' }}">
+                            {{ job.type }}
+                        </span>
+                        <span class="work-years">{{ job.duration }}</span>
+                    </div>
+                </div>
+                <ul class="work-bullets">
+                    {% for point in job.points %}
+                    <li>{{ point }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{%endblock%}
