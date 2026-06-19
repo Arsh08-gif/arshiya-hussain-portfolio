@@ -17,5 +17,4 @@ def index():
         title="MLH Fellow",
         url=os.getenv("URL"),
         about=about,
-        
     )
