@@ -27,17 +27,19 @@
                     <img src="./static/img/logo.svg" />
                 </div>
             </a>
+
             <nav>
                 <a href="/" class="{{ 'active' if request.path == '/' }}">Home</a>
                 <a href="/#about">About</a>
-                <a href="/">Experience</a>
-                <a href="/">Education</a>
-                <a href="/">Travel</a>
-                <a href="/" class="{{ 'active' if request.path == '/' }}">Hobbies</a>
+                <a href="/#experience">Experience</a>
+                <a href="/#education">Education</a>
+                <a href="/#travel">Travel</a>
+                <a href="/hobbies" class="{{ 'active' if request.path == '/hobbies' }}">Hobbies</a>
             </nav>
         </div>
     </header>
-    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     {%block content%} {%endblock%}
 
 </body>

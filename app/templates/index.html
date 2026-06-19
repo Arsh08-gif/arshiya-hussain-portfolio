@@ -19,5 +19,108 @@
     </div>
 </section>
 
+<!-- Experience -->
+<section class="section" id="experience">
+    <h2>Work Experience</h2>
+    <div class="work-timeline">
+        {% for job in work_experiences %}
+        <div class="work-card">
+            <div class="work-body">
+                <div class="work-header">
+                    <div>
+                        <h3>{{ job.role }}</h3>
+                        <p class="work-company">
+                            <span class="work-company-name">{{ job.company }}</span>
+                            <span class="work-dot">·</span>
+                            <span class="work-location">{{ job.location }}</span>
+                        </p>
+                    </div>
+                    <div class="work-meta">
+                        <span class="work-type {{ 'type-full' if job.type == 'Full-Time' else 'type-intern' }}">
+                            {{ job.type }}
+                        </span>
+                        <span class="work-years">{{ job.duration }}</span>
+                    </div>
+                </div>
+                <ul class="work-bullets">
+                    {% for point in job.points %}
+                    <li>{{ point }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
 
+<!-- Education -->
+<section class="section" id="education">
+    <h2>Education</h2>
+    <div class="edu-timeline">
+        {% for edu in education %}
+        <div class="edu-card">
+            <div class="edu-body">
+                <div class="edu-header">
+                    <div>
+                        <h3>{{ edu.degree }}</h3>
+                        <p class="edu-school">
+                            <span class="edu-school-name">{{ edu.school }}</span>
+                            <span class="edu-dot">·</span>
+                            <span class="edu-location">{{ edu.location }}</span>
+                        </p>
+                        <p class="edu-dept">{{ edu.department }}</p>
+                    </div>
+                    <div class="edu-meta">
+                        <span
+                            class="edu-status {{ 'status-progress' if edu.status == 'In Progress' else 'status-done' }}">
+                            {{ edu.status }}
+                        </span>
+                        <span class="edu-years">{{ edu.duration }}</span>
+                    </div>
+                </div>
+                <ul class="edu-bullets">
+                    {% for point in edu.points %}
+                    <li>{{ point }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Travel -->
+<section class="section" id="travel">
+    <h2>Places I've Been</h2>
+    <div id="travel-map"></div>
+    <div class="map-tags">
+        {% for place in places %}
+        <span class="map-tag">{{ place.emoji }} {{ place.name }}</span>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Map script - Openstreet map API -->
+<script>
+    const travelPlaces = {{ places | tojson }};
+
+    const map = L.map('travel-map', { zoomControl: true }).setView([20, 0], 2);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    const customIcon = L.divIcon({
+        html: '📍',
+        className: '',
+        iconSize: [24, 24],
+        iconAnchor: [12, 24],
+    });
+
+    travelPlaces.forEach(place => {
+        L.marker([place.lat, place.lng], { icon: customIcon })
+            .addTo(map)
+            .bindPopup(`<b>${place.name}</b><br>${place.note}`);
+    });
+</script>
 {%endblock%}
