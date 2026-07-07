@@ -548,3 +548,114 @@ html {
     color: #1a1a2e;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
+
+
+/* ── Timeline Form ── */
+.timeline-form {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-left: 4px solid #1d539f;
+    margin-bottom: 40px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: "Roboto", sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #1d539f;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.timeline-form button {
+    background: #1d539f;
+    color: white;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    
+}
+
+.timeline-form button:hover {
+    background: #1a4a8f;
+}
+
+/* ── Timeline Posts ── */
+.timeline-posts {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.timeline-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-left: 4px solid #1d539f;
+    transition: box-shadow 0.2s;
+}
+
+.timeline-card:hover {
+    box-shadow: 0 4px 16px rgba(29,83,159,0.15);
+}
+
+.timeline-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.timeline-name {
+    font-weight: 700;
+    color: #1d539f;
+    font-size: 16px;
+}
+
+.timeline-date {
+    color: #888;
+    font-size: 13px;
+}
+
+.timeline-email {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.timeline-content {
+    color: #444;
+    font-size: 15px;
+    line-height: 1.6;
+}

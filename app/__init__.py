@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from dotenv import load_dotenv
 from peewee import *
 import datetime
@@ -39,7 +39,9 @@ def post_timeline_post():
     email = request.form['email']
     content = request.form['content']
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
-    return model_to_dict(timeline_post)
+    # return model_to_dict(timeline_post)
+    return redirect("/timeline")
+    
 
 # get requests only fetch data.
 @app.route("/api/timeline_post", methods=['GET'])
@@ -54,6 +56,12 @@ def get_timeline_post():
 def delete_timeline_post(id):
     timeline_post = TimelinePost.delete_by_id(id)
     return {"deleted": timeline_post}
+
+
+@app.route("/timeline")
+def timeline():
+    posts = TimelinePost.select().order_by(TimelinePost.created_at.desc())
+    return render_template('timeline.html', timeline_posts=[model_to_dict(p) for p in posts])
 
 @app.route("/")
 def index():
