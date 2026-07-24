@@ -22,6 +22,8 @@ services:
     container_name: nginx
     image: jonasal/nginx-certbot
     restart: always
+    env_file:
+      - .env
     environment:
       - CERTBOT_EMAIL=name@example.com
     ports:
@@ -32,6 +34,7 @@ services:
       - ./user_conf.d:/etc/nginx/user_conf.d
     depends_on:
       - myportfolio
+
 volumes:
   mydatabase:
   nginx_secrets:
