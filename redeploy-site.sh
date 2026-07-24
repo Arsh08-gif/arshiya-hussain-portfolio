@@ -8,15 +8,10 @@ echo "Step 1: Pulling latest changes..."
 
 git fetch && git reset origin/main --hard
 
-echo "Step 3: Installing dependencies..."
+echo "Step 3: Running docker compose..."
 
-source /root/arshiya-hussain-portfolio/python3-virtualenv/bin/activate
+docker compose -f docker-compose.prod.yml down
 
-pip install -r requirements.txt
-
-echo "Step 4: Restarting Flask Server..."
-systemctl daemon-reload
-systemctl restart myportfolio
-
-echo "Deployment Complete!"
-systemctl status myportfolio
+echo "Step 4: Building docker compose.."
+ 
+docker compose -f docker-compose.prod.yml up -d --build
