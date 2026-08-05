@@ -217,7 +217,8 @@ def hobbies_page():
         {
             "name": "Art",
             "description": "Art makes a quiet appearance in my life every once in a while — a small painting here and there, just for the joy of it.",
-            "image": "https://images.pexels.com/photos/1269968/pexels-photo-1269968.jpeg?w=400",
+            # "image": "https://images.pexels.com/photos/1269968/pexels-photo-1269968.jpeg?w=400",
+            "image": "https://cdn.pixabay.com/photo/2016/06/25/12/55/art-1478831_1280.jpg"
         },
     ]
     return render_template("hobbies.html", hobbies=hobbies)
