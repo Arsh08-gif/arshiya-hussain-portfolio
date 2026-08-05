@@ -295,7 +295,7 @@ html {
     content: "💼";
     position: absolute;
     left: -36px;
-    top: 14px;
+    top: -6px;
     font-size: 18px;
 }
 
@@ -424,7 +424,7 @@ html {
     content: "🎓";
     position: absolute;
     left: -36px;
-    top: 14px;
+    top: -6px;
     font-size: 18px;
 }
 

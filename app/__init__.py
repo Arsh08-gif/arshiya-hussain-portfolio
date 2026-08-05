@@ -119,7 +119,6 @@ def index():
             "points": [
                 "Exploring agent skill security through OpenClaw malicious skill analysis",
                 "MITRE eCTF 2026 Participant",
-                "Brainstorm BCI Hackathon 2026 — Runner Up",
             ],
         },
         {
@@ -130,7 +129,6 @@ def index():
             "duration": "2020 — 2024",
             "status": "Completed",
             "points": [
-                "Graduated with First Class Distinction",
                 "Internship: E-Connect Solutions (.NET)",
                 "Internship: V2 Solutions (Salesforce)",
             ],
