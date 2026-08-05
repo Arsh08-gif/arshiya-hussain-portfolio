@@ -32,5 +32,6 @@ jobs:
             #   run: ssh my-vps 'cd ${{ secrets.PROJECT_ROOT }} && pwd'
 
             - name: Deploy site
-              run: ssh my-vps '~/arshiya-hussain-portfolio/redeploy-site.sh'
+              # run: ssh my-vps '~/arshiya-hussain-portfolio/redeploy-site.sh'
+              run: ssh my-vps 'chmod +x ~/arshiya-hussain-portfolio/redeploy-site.sh && ~/arshiya-hussain-portfolio/redeploy-site.sh'
 
