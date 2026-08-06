@@ -55,7 +55,7 @@ jobs:
       #   run: ssh my-vps 'cd ${{ secrets.PROJECT_ROOT }} && pwd'
 
       - name: Container status
-        run: ssh my-vps '~/arshiya-hussain-portfolio/docker-compose ps'
+        run: ssh my-vps 'cd ~/arshiya-hussain-portfolio && docker compose ps'
 
       - name: Deploy site
         # run: ssh my-vps '~/arshiya-hussain-portfolio/redeploy-site.sh'
