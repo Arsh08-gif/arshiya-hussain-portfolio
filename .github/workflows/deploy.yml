@@ -29,6 +29,15 @@ jobs:
 
       - name: Run Tests
         run: ./run_test.sh
+
+  notify-test-failure:
+    runs-on: ubuntu-latest
+    needs: test
+    if: failure()
+    steps:
+      - name: Test failure message
+        run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🧪 Tests Failed — Deployment Skipped"
+
   deploy:
     name: "Deploy to VPS"
     runs-on: ubuntu-latest
@@ -62,4 +71,9 @@ jobs:
         run: ssh my-vps 'chmod +x ~/arshiya-hussain-portfolio/redeploy-site.sh && ~/arshiya-hussain-portfolio/redeploy-site.sh'
 
       - name: Deployment success message
+        if: success()
         run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚀 Deployment Successful"
+
+      - name: Deployment failure message
+        if: failure()
+        run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚨 Deployment Failed"
