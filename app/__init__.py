@@ -10,17 +10,18 @@ app = Flask(__name__)
 
 if os.getenv("TESTING") == "true":
     print("Running in test mode")
-    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+    mydb = SqliteDatabase("file:memory?mode=memory&cache=shared", uri=True)
 else:
     mydb = MySQLDatabase(
         os.getenv("MYSQL_DATABASE"),
-        user = os.getenv("MYSQL_USER"),
-        password = os.getenv("MYSQL_PASSWORD"),
-        host = os.getenv("MYSQL_HOST"),
-        port = 3306
+        user=os.getenv("MYSQL_USER"),
+        password=os.getenv("MYSQL_PASSWORD"),
+        host=os.getenv("MYSQL_HOST"),
+        port=3306,
     )
 
 print(mydb)
+
 
 # the class defines the table in the database and the variables inside define the columns of the table
 class TimelinePost(Model):
@@ -29,19 +30,34 @@ class TimelinePost(Model):
     content = TextField()
     created_at = DateTimeField(default=datetime.datetime.now)
 
-    # tells pewee which database this class (table) belongs to 
+    # tells pewee which database this class (table) belongs to
     class Meta:
         database = mydb
+
+
 mydb.connect(reuse_if_open=True)
 mydb.create_tables([TimelinePost])
 
 
+@app.route("/health")
+def health():
+    status = {"app": "ok"}
+    try:
+        mydb.connect(reuse_if_open=True)
+        mydb.execute_sql("SELECT 1")
+        status["database"] = "ok"
+    except Exception as e:
+        status["database"] = f"error: {str(e)}"
+        return status, 503
+    return status, 200
+
+
 # post request sends request to the database with some data to store or fetch some data based on this data.
-@app.route("/api/timeline_post", methods = ['POST'])
+@app.route("/api/timeline_post", methods=["POST"])
 def post_timeline_post():
-    name = request.form.get('name', '').strip()
-    email = request.form.get('email', '').strip()
-    content = request.form.get('content', '').strip()
+    name = request.form.get("name", "").strip()
+    email = request.form.get("email", "").strip()
+    content = request.form.get("content", "").strip()
 
     if not name:
         return "Invalid name", 400
@@ -53,18 +69,20 @@ def post_timeline_post():
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
     # return model_to_dict(timeline_post)
     return redirect("/timeline")
-    
+
 
 # get requests only fetch data.
-@app.route("/api/timeline_post", methods=['GET'])
+@app.route("/api/timeline_post", methods=["GET"])
 def get_timeline_post():
     return {
-        'timeline_posts': [
-            model_to_dict(p) for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
+        "timeline_posts": [
+            model_to_dict(p)
+            for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
         ]
     }
-    
-@app.route("/api/timeline_post/<int:id>", methods=['DELETE'])
+
+
+@app.route("/api/timeline_post/<int:id>", methods=["DELETE"])
 def delete_timeline_post(id):
     timeline_post = TimelinePost.delete_by_id(id)
     return {"deleted": timeline_post}
@@ -73,7 +91,10 @@ def delete_timeline_post(id):
 @app.route("/timeline")
 def timeline():
     posts = TimelinePost.select().order_by(TimelinePost.created_at.desc())
-    return render_template('timeline.html', timeline_posts=[model_to_dict(p) for p in posts])
+    return render_template(
+        "timeline.html", timeline_posts=[model_to_dict(p) for p in posts]
+    )
+
 
 @app.route("/")
 def index():
@@ -218,7 +239,7 @@ def hobbies_page():
             "name": "Art",
             "description": "Art makes a quiet appearance in my life every once in a while — a small painting here and there, just for the joy of it.",
             # "image": "https://images.pexels.com/photos/1269968/pexels-photo-1269968.jpeg?w=400",
-            "image": "https://cdn.pixabay.com/photo/2016/06/25/12/55/art-1478831_1280.jpg"
+            "image": "https://cdn.pixabay.com/photo/2016/06/25/12/55/art-1478831_1280.jpg",
         },
     ]
     return render_template("hobbies.html", hobbies=hobbies)
